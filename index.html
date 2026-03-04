@@ -1,1 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaussian Wardrobe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="images/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+         body {
+            font-family: 'Inter', sans-serif;
+            /* Applying a subtle linear gradient from top to bottom */
+            background: linear-gradient(to bottom, #ffffff, #e2e8f0);
+            background-color: #f8fafc; /* Fallback for older browsers */
+            background-attachment: fixed; /* Keeps the gradient fixed during scroll */
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e293b;
+        }
+        .bibtex {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #475569;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .copy-btn:hover {
+            background-color: #64748b;
+        }
+        .copy-btn.copied {
+            background-color: #16a34a;
+        }
+        /* Global link style */
+        .text-link {
+            color: #0d9488; /* This is Tailwind's teal-600 */
+            text-decoration: none;
+        }
+        .text-link:hover {
+            color: #0f766e; /* This is Tailwind's teal-700 */
+            text-decoration: underline;
+        }
+        video {
+            /* Ensures videos have a consistent look */
+            background-color: #e2e8f0; /* Light gray background for videos */
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
 
+<body class="text-slate-800">
+    <!-- Header Section -->
+    <header class="text-center py-12">
+        <div class="max-w-4xl mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+                👗Gaussian Wardrobe🧥 <br>
+                <span class="text-3xl md:text-4xl font-semibold">Compositional 3D Gaussian Avatars for <br class="hidden md:block"/> Free-Form Virtual Try-on</span>
+            </h1>
+            <p class="text-lg text-slate-600 mb-6">
+                3DV 2025 Paper
+            </p>
+            <div class="flex justify-center items-center flex-wrap gap-x-6 gap-y-2 mb-8">
+                <span class="font-medium"><a href="https://www.linkedin.com/in/zhiyi-chen-a094b2175/" target="_blank" class="text-link">Zhiyi Chen</a><sup>*1</sup></span>
+                <span class="font-medium"><a href="https://azuxmioy.github.io/" target="_blank" class="text-link">Hsuan-I Ho</a><sup>*1</sup></span>
+                <span class="font-medium"><a href="https://www.linkedin.com/in/tianjian-jiang-2383191a6/" target="_blank" class="text-link">Tianjian Jiang</a><sup>1</sup></span>
+                <span class="font-medium"><a href="https://ait.ethz.ch/people/song" target="_blank" class="text-link">Jie Song</a><sup>3,4</sup></span>
+                <span class="font-medium"><a href="https://ait.ethz.ch/people/kamanuel" target="_blank" class="text-link">Manuel Kaufmann</a><sup>1,2</sup></span>
+                <span class="font-medium"><a href="https://moygcc.github.io/" target="_blank" class="text-link">Chen Guo</a><sup>1</sup></span>
+            </div>
+            <div class="text-sm text-gray-500 mb-6"><sup>*</sup>Equal contribution</div>
+            <!-- Affiliations Section -->
+            <div class="flex flex-col justify-center items-center gap-y-4 text-slate-500 mb-8">
+                <div class="w-80"> <!-- Container for the logo -->
+                    <a href="https://ait.ethz.ch/">
+                        <!-- Placeholder for the logo image -->
+                        <img src="images/ait_logo.png" 
+                             alt="AIT Lab Logo" 
+                             class="w-full h-auto" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/200x60/e2e8f0/334155?text=Logo+Not+Found';">
+                    </a>
+                </div>
+                <div class="text-center space-y-2"> <!-- Container for the text affiliation -->
+                    <p>
+                        <sup>1</sup> <a href="https://inf.ethz.ch/" target="_blank" class="text-link">Department of Computer Science, ETH Zürich</a>
+                    </p>
+                    <p>
+                        <sup>2</sup> <a href="https://ai.ethz.ch/" target="_blank" class="text-link">ETH AI Center, ETH Zürich</a>
+                    </p>
+                    <p>
+                        <sup>3</sup> <a href="https://hkust-gz.edu.cn/" target="_blank" class="text-link">HKUST(GZ)</a>
+                        <span class="mx-4"></span>
+                        <sup>4</sup> <a href="https://hkust.edu.hk/" target="_blank" class="text-link">HKUST</a>
+                    </p>
+                </div>
+            </div>
+            <div class="mt-8 flex justify-center gap-4">
+                 <!-- Links -->
+                <a href="#" class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Paper</a>
+                <a href="#" class="bg-gray-800 text-white font-semibold px-6 py-2 rounded-lg hover:bg-gray-900 transition-colors">Code</a>
+                <a href="#" class="bg-teal-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors">Video</a>
+                <a href="https://ait.ethz.ch/gaussianwardrobe" class="bg-orange-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors">Project Page</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- TL;DR Section -->
+    <section id="tldr" class="section">
+        <h2 class="section-title">TL;DR</h2>
+        <div class="max-w-5xl mx-auto bg-white p-8 rounded-lg shadow-md text-lg leading-relaxed text-slate-700">
+            <ul class="list-disc list-inside space-y-2">
+                <li>We introduce a novel compositional 3D Gaussian representation to model avatars with complex, free-form garments.</li>
+                <li>Our method decomposes neural avatars into bodies and multiple layers of shape-agnostic neural garments from multi-view videos.</li>
+                <li>The learned neural garments can be stored in a digital wardrobe and seamlessly transferred to new subjects for realistic 3D virtual try-on.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Teaser Image/Video Section -->
+    <section id="teaser" class="py-12">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="bg-slate-200 rounded-lg overflow-hidden shadow-lg">
+
+                <iframe 
+                    class="w-full aspect-video"
+                    src="https://www.youtube.com/embed/8fGe9ATJjuI?si=NjOA38t1De4Z655w" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </br>
+        <div class="max-w-5xl mx-auto px-4">
+
+            <div class="bg-slate-200 rounded-lg overflow-hidden shadow-lg">
+                <img src="images/teaser.jpg" 
+                     alt="Project Teaser Image" 
+                     class="w-full h-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/1200x675/e2e8f0/334155?text=Gaussian+Wardrobe+Teaser';">
+            </div>
+            <p class="text-center text-slate-600 mt-4 italic" style="text-align:justify">
+               Gaussian Wardrobe digitalizes compositional 3D Gaussian avatars from multi-view videos. The learned neural garments are subject-agnostic. Therefore, they can be stored, reused, and seamlessly recombined with new subjects. Leveraging Gaussian Wardrobe, we realize a practical 3D avatar virtual try-on application demonstrating the capabilities of modeling the dynamics of challenging free-form clothing such as skirts, dresses, and open jackets.
+            </p>
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section id="abstract" class="section">
+        <h2 class="section-title">Abstract</h2>
+        <div class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <p class="text-lg leading-relaxed text-slate-700" style="text-align:justify">
+                We introduce Gaussian Wardrobe, a novel framework to digitalize compositional 3D neural avatars from multi-view videos. Existing methods for 3D neural avatars typically treat the human body and clothing as an inseparable entity. However, this paradigm fails to capture the dynamics of complex free-form garments and limits the reuse of clothing across different individuals. To overcome these problems, we develop a novel, compositional 3D Gaussian representation to build avatars from multiple layers of free-form garments. The core of our method is decomposing neural avatars into bodies and layers of shape-agnostic neural garments. To achieve this, our framework learns to disentangle each garment layer from multi-view videos and canonicalizes it into a shape-independent space. In experiments, our method models photorealistic avatars with high-fidelity dynamics, achieving new state-of-the-art performance on novel pose synthesis benchmarks. In addition, we demonstrate that the learned compositional garments contribute to a versatile digital wardrobe, enabling a practical virtual try-on application where clothing can be freely transferred to new subjects.
+            </p>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section id="method" class="section">
+        <h2 class="section-title">Method</h2>
+        <div class="flex flex-col gap-8 max-w-5xl mx-auto">
+            <div class="bg-slate-200 rounded-lg overflow-hidden shadow-lg w-full">
+                <img src="images/method.jpg" 
+                     alt="Method Architecture Diagram" 
+                     class="w-full h-auto"
+                     onerror="this.onerror=null;this.src='https://placehold.co/1200x500/e2e8f0/334155?text=Method+Pipeline';">
+            </div>
+            <div class="text-lg leading-relaxed text-slate-700 w-full">
+                <p class="mb-4" style="text-align: justify;">
+                    Our framework canonicalizes an input template mesh into a zero-shaped space and segments it into distinct body and garment components. During training, layer-specific U-Nets predict the parameters of 3D Gaussian primitives from pose-conditioned positional maps. Finally, we composite the 3D Gaussians from all layers to render the final RGB images and segmentation masks.
+                </p>
+                <ul class="list-disc list-inside space-y-2">
+                    <h3 class="font-bold text-lg mb-2">Technical Contributions:</h3>
+                    <li>Compositional Representation: Separating the body and garments into zero-shape canonical templates for cross-subject compatibility.</li>
+                    <li>Garment Learning: Joint optimization of separate neural garments using photometric, segmentation, and inter-layer penetration losses.</li>
+                    <li>Penetration-Aware Rendering: An online correction algorithm during rendering to resolve interpenetration artifacts in novel poses.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="section">
+        <h2 class="section-title">Results on 4D-DRESS</h2>
+        <div class="space-y-12">
+            
+            <!-- Result Item 1 -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <!-- Column for Input Image -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">Input Images</h4>
+                        <img src="images/example1.png" 
+                             alt="Input Image" 
+                             class="w-full h-auto rounded-lg shadow-md"
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                    </div>
+                    <!-- Column for Method 1 -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">Animatable Gaussians</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/smplicit_crop.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <!-- Column for Method 2 -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">LayGA</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/clothwild_crop.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <!-- Column for Ours -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-teal-600">Ours</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/ours_crop.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Item 2 -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <!-- Column for Input Image -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">Input Images</h4>
+                        <img src="images/example2.png" 
+                             alt="Input Image" 
+                             class="w-full h-auto rounded-lg shadow-md"
+                             onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                    </div>
+                    <!-- Column for Method 1 -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">Animatable Gaussians</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/smplicit2_crop.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <!-- Column for Method 2 -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">LayGA</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/clothwild2_crop.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <!-- Column for Ours -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-teal-600">Ours</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/ours2_crop.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add more result items by copying the structure above -->
+
+        </div>
+    </section>
+
+   <!-- Virtual Try-On Applications Section -->
+    <section id="virtual-try-on" class="section">
+        <h2 class="section-title">Virtual Try-On Applications</h2>
+        <div class="bg-white rounded-lg shadow-lg p-6 space-y-8">
+            <!-- Image Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <img src="images/0.jpg" 
+                         alt="Virtual Try-On 1" 
+                         class="w-full h-auto rounded-lg shadow-md"
+                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                </div>
+                <div>
+                    <img src="images/1.jpg" 
+                         alt="Virtual Try-On 2" 
+                         class="w-full h-auto rounded-lg shadow-md"
+                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                </div>
+                <div>
+                    <img src="images/2.jpg" 
+                         alt="Virtual Try-On 3" 
+                         class="w-full h-auto rounded-lg shadow-md"
+                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                </div>
+                <div>
+                    <img src="images/3.jpg" 
+                         alt="Virtual Try-On 4" 
+                         class="w-full h-auto rounded-lg shadow-md"
+                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                </div>
+            </div>
+            <!-- Video Row -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                    <video class="w-full h-auto" autoplay loop muted playsinline>
+                        <source src="videos/aitviewer_0_crop.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div>
+                    <video class="w-full h-auto" autoplay loop muted playsinline>
+                        <source src="videos/aitviewer_1_crop.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div>
+                    <video class="w-full h-auto" autoplay loop muted playsinline>
+                        <source src="videos/aitviewer_2_crop.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div>
+                    <video class="w-full h-auto" autoplay loop muted playsinline>
+                        <source src="videos/aitviewer_3_crop.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- References Section -->
+    <section id="references" class="section">
+        <h2 class="section-title">References</h2>
+        <div class="max-w-5xl mx-auto text-slate-700 leading-relaxed">
+            <ul class="list-disc list-inside space-y-2">
+                <li>
+                    Li et. al, "<a href="#" target="_blank" class="text-link">Animatable Gaussians: Learning Pose-dependent Gaussian Maps for High-fidelity Human Avatar Modeling</a>." CVPR, 2024.
+                </li>
+                <li>
+                    Lin et. al, "<a href="#" target="_blank" class="text-link">LayGA: Layered Gaussian Avatars for Animatable Clothing Transfer</a>." SIGGRAPH, 2024.
+                </li>
+                <li>
+                    Wang et. al, "<a href="https://eth-ait.github.io/4d-dress/" target="_blank" class="text-link">4D-DRESS: A 4D Dataset of Real-world Human Clothing with Semantic Annotations</a>." CVPR, 2024.
+                </li>
+                <li>
+                    Chen et. al, "<a href="#" target="_blank" class="text-link">Fast-SNARF: A Fast Deformer for Articulated Neural Fields</a>." TPAMI, 2023.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Citation Section -->
+    <section id="citation" class="section">
+        <h2 class="section-title">Citation</h2>
+        <div class="max-w-4xl mx-auto">
+            <div class="bibtex">
+                <button id="copy-button" class="copy-btn">Copy</button>
+                <code id="bibtex-content">
+@inproceedings{chen2026gaussian,
+  title={Gaussian Wardrobe: Compositional 3D Gaussian Avatars for Free-Form Virtual Try-on},
+  author={Chen, Zhiyi and Ho, Hsuan-I and Jiang, Tianjian and Song, Jie and Kaufmann, Manuel and Guo, Chen},
+  booktitle={Thirteenth International Conference on 3D Vision},
+  year={2026},
+  url={https://openreview.net/forum?id=sncanvgvUn}
+}
+                </code>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 bg-slate-800 text-slate-400">
+        <p>Template designed by Gemini. Feel free to use and adapt.</p>
+    </footer>
+
+    <script>
+        // JavaScript for Copy to Clipboard functionality
+        const copyButton = document.getElementById('copy-button');
+        const bibtexContent = document.getElementById('bibtex-content');
+
+        copyButton.addEventListener('click', () => {
+            // Create a temporary textarea element to hold the text
+            const textArea = document.createElement('textarea');
+            textArea.value = bibtexContent.innerText;
+            
+            // Hide the textarea from view
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+            
+            document.body.appendChild(textArea);
+            
+            textArea.select();
+            
+            try {
+                // Use the older execCommand for broader compatibility in iFrames
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    copyButton.textContent = 'Copied!';
+                    copyButton.classList.add('copied');
+                    setTimeout(() => {
+                        copyButton.textContent = 'Copy';
+                        copyButton.classList.remove('copied');
+                    }, 2000);
+                } else {
+                    // We don't use alert in this environment.
+                    console.error('Oops, unable to copy');
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        });
+    </script>
+
+</body>
+</html>
