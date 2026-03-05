@@ -1,0 +1,86 @@
+mode: train
+smpl_pos_map: smpl_pos_map_offset
+train:
+  dataset: MvRgbDatasetActorsHQ
+  data:
+    layers: ["body", "cloth"]
+    subject_name: actor01
+    data_dir: /data/zhiychen/ActorHQ/Actor01/Sequence1/4x
+    frame_range: 
+    - 46
+    - 2177
+    - 2
+    used_cam_ids: [7, 22, 39, 56, 79, 80, 95,
+                    109, 112, 126, 127,
+                    151, 152, 160]
+    load_smpl_pos_map: true
+    use_label: true
+    use_body_label: true
+    use_normal: false
+  pretrained_dir: null
+  net_ckpt_dir: /mnt/work/Clothes4D/zhiychen/results/ActorHQ/actor01_train_new
+  inner_ckpt_dir: null
+  prev_ckpt: /mnt/work/Clothes4D/zhiychen/results/ActorHQ/actor01_train_new/epoch_latest
+  ckpt_interval:
+    epoch: 5
+    batch: 1000
+  eval_interval: 1000
+  dropout_interval: 1000
+  eval_training_ids: [481, 4]
+  eval_testing_ids: [1010, 126]
+  eval_img_factor: 1.0
+  lr_init: 0.00015
+  loss_weight:
+    l1: 1.
+    lpips: 0.2
+    face_lpips: 0.1
+    ssim: 0.01
+    offset: 0.005
+    laplacian: 0.005
+    body_loss: 0.1
+    consistent_body_color: 0.
+    consistent_label: 0.5
+    consistent_label_body: 0.025
+    opacity_loss: 0.001
+    normal_loss: 0.
+    inner_cloth_laplacian: 0.00
+    inner_cloth_loss: 0
+    outer_to_body_loss: 0.
+  finetune_color: false
+  batch_size: 1
+  num_workers: 8
+  random_bg_color: true
+  gd_clip: 0.001
+test:
+  dataset: MvRgbDatasetActorsHQ
+  render_layers: ["both"]
+  data:
+    layers: ["body", "cloth"]
+    subject_name: actor01_novel_view
+    data_dir: /data/zhiychen/ActorHQ/Actor01/Sequence1/4x
+    frame_range: 
+    - 900
+    - 1200
+    - 2
+    used_cam_ids: [7, 22, 39, 56, 79, 80, 95,
+                    109, 112, 126, 127,
+                    151, 152, 160]
+  view_setting: free
+  render_view_idx: 128
+  global_orient: true
+  img_scale: 1.0
+  save_mesh: false
+  render_skeleton: false
+  save_tex_map: false
+  save_ply: false
+  fix_hand: false
+  fix_hand_id: 0
+  n_pca: -1
+  sigma_pca: 2.0
+  prev_ckpt: /mnt/work/Clothes4D/zhiychen/results/ActorHQ/actor01_train_new/epoch_latest
+
+model:
+  with_viewdirs: true
+  random_style: false
+  module: network.multi_layer_avatar
+  network: MultiLAvatarNet

@@ -1,0 +1,107 @@
+mode: train
+smpl_pos_map: stretch_dance
+sequence_name: stretch_dance
+train:
+  dataset: MvRgbDataset4DDress
+  data:
+    layers: ["body", "cloth"]
+    subject_name: 127
+    data_dir: /data/zhiychen/AnimatableGaussain/test_data/multiviewRGC/4d_dress/cloth_00127_body_00134/Inner/cloth
+    # used_cam_ids: [0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11]
+    # frame_range:
+    # - 0
+    # - 1
+    # - 1
+    load_smpl_pos_map: true
+    use_label: true
+    use_body_label: true
+    use_normal: false
+  pretrained_dir:  null
+  net_ckpt_dir: /data/zhiychen/AnimatableGaussain/results/4d_dress/00156/more_body_lable_loss
+  inner_ckpt_dir: null
+  prev_ckpt: /data/zhiychen/AnimatableGaussain/results/4d_dress/00156/more_body_lable_loss/batch_185000
+  ckpt_interval:
+    epoch: 3
+    batch: 1000
+  eval_interval: 50
+  dropout_interval: 1000
+  eval_training_ids: [20, 1]
+  eval_testing_ids: [20, 1]
+  eval_img_factor: 1.0
+  lr_init: 0.00015
+  loss_weight:
+    l1: 1
+    lpips: 0.1
+    offset: 0.005
+    laplacian: 0.001
+    body_loss: 1
+    consistent_body_color: 0.
+    consistent_label: 0.5
+    consistent_label_body: 0.05
+    opacity_loss: 0.
+    normal_loss: 0.
+  finetune_color: false
+  batch_size: 1
+  num_workers: 8
+  random_bg_color: true
+  gd_clip: 0.001
+test:
+  dataset: MvRgbDataset4DDress
+  render_layers: ["both"]
+  data:
+    layers: ["body", "cloth"]
+    subject_name: 00185_filter_fix_offset
+    data_dir: /data/zhiychen/AnimatableGaussain/test_data/multiviewRGC/4d_dress/00134/Inner
+  view_setting: camera
+  render_view_idx: 0
+  global_orient: true
+  img_scale: 1.0
+  save_mesh: false
+  render_skeleton: false
+  save_tex_map: false
+  save_ply: false
+  fix_hand: false
+  fix_hand_id: 431
+  n_pca: -1
+  sigma_pca: 2.0
+  prev_ckpt: /data/zhiychen/AnimatableGaussain/results/4d_dress/00134/segment_face_less_laplacian/epoch_latest
+model:
+  with_viewdirs: true
+  random_style: false
+  cover: true
+  offset_mode: original
+  module: network.multi_layer_avatar
+  network: MultiLAvatarNet
+exchange_cloth:
+  dataset: MvRgbDataset4DDress
+  render_layers: ["both"]
+  seq_name: "fly_basketball"
+  change_mode: cross_change_inner
+  data_dir:   /data/zhiychen/AnimatableGaussain/test_data/multiviewRGC/4d_dress/upper_00163_lower_00185_body_00163
+  data_lower:
+    layers: ["body", "cloth"]
+    subject_name: 185_163_exchange
+    data_dir:   /data/zhiychen/AnimatableGaussain/test_data/multiviewRGC/4d_dress/upper_00163_lower_00185_body_00163/lower
+  data_upper:
+    layers: ["body", "cloth"]
+    subject_name: 185_163_exchange
+    data_dir:  /data/zhiychen/AnimatableGaussain/test_data/multiviewRGC/4d_dress/upper_00163_lower_00185_body_00163/upper
+  data_body:
+    layers: ["body", "cloth"]
+    subject_name: 185_163_exchange
+    data_dir:  /data/zhiychen/AnimatableGaussain/test_data/multiviewRGC/4d_dress/upper_00163_lower_00185_body_00163/body
+  view_setting: camera
+  render_view_idx: 0
+  global_orient: true
+  img_scale: 1.0
+  save_mesh: false
+  render_skeleton: false
+  save_tex_map: false
+  save_ply: false
+  fix_hand: false
+  fix_hand_id: 431
+  n_pca: -1
+  sigma_pca: 2.0
+  lower_ckpt:   /data/zhiychen/AnimatableGaussain/results/4d_dress/00185/face_lpips/epoch_latest
+  upper_ckpt:  /data/zhiychen/AnimatableGaussain/results/4d_dress/00163/body_loss/epoch_latest
+  body_ckpt: /data/zhiychen/AnimatableGaussain/results/4d_dress/00163/body_loss/epoch_latest
