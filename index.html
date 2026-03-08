@@ -73,6 +73,42 @@
             border-radius: 0.5rem;
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
+        /* Custom styles for interactive thumbnails */
+        .thumbnail-btn {
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .thumbnail-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* --- PURE HTML/CSS LOGIC FOR VIRTUAL TRY-ON --- */
+        /* Highlights the border of the selected thumbnail */
+        #tab0:checked ~ .tryon-layout .thumb0,
+        #tab1:checked ~ .tryon-layout .thumb1,
+        #tab2:checked ~ .tryon-layout .thumb2,
+        #tab3:checked ~ .tryon-layout .thumb3 {
+            border-color: #14b8a6; /* Tailwind teal-500 */
+        }
+
+        /* Default video is visible initially, specific ones are hidden */
+        .vid-default { display: block; }
+        .vid0, .vid1, .vid2, .vid3 { display: none; }
+
+        /* Hide the default video if ANY radio button is checked */
+        #tab0:checked ~ .tryon-layout .vid-default,
+        #tab1:checked ~ .tryon-layout .vid-default,
+        #tab2:checked ~ .tryon-layout .vid-default,
+        #tab3:checked ~ .tryon-layout .vid-default {
+            display: none;
+        }
+
+        /* Shows the specific video based on which radio button is checked */
+        #tab0:checked ~ .tryon-layout .vid0,
+        #tab1:checked ~ .tryon-layout .vid1,
+        #tab2:checked ~ .tryon-layout .vid2,
+        #tab3:checked ~ .tryon-layout .vid3 {
+            display: block;
+        }
     </style>
 </head>
 
@@ -161,7 +197,7 @@
                     allowfullscreen></iframe>
             </div>
         </div>
-    </br>
+        <br>
         <div class="max-w-5xl mx-auto px-4">
 
             <div class="bg-slate-200 rounded-lg overflow-hidden shadow-lg">
@@ -212,33 +248,34 @@
 
     <!-- Results Section -->
     <section id="results" class="section">
-        <h2 class="section-title">Results on 4D-DRESS</h2>
+        <h2 class="section-title">Avatar Animation on 4D-DRESS (Novel Poses)</h2>
         <div class="space-y-12">
             
             <!-- Result Item 1 -->
             <div class="bg-white rounded-lg shadow-lg p-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                    <!-- Column for Input Image -->
+                    <!-- Column for GT -->
                     <div>
-                        <h4 class="font-semibold mb-2 text-slate-600">Input Images</h4>
-                        <img src="images/example1.png" 
-                             alt="Input Image" 
-                             class="w-full h-auto rounded-lg shadow-md"
-                             onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+                        <h4 class="font-semibold mb-2 text-slate-600">GT Reference</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/00185_gt.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
+
                     <!-- Column for Method 1 -->
                     <div>
-                        <h4 class="font-semibold mb-2 text-slate-600">Animatable Gaussians</h4>
+                        <h4 class="font-semibold mb-2 text-slate-600">LayGA</h4>
                         <video class="w-full h-auto" autoplay loop muted playsinline>
-                            <source src="videos/smplicit_crop.mp4" type="video/mp4">
+                            <source src="videos/00185_LAYGA.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                     <!-- Column for Method 2 -->
                     <div>
-                        <h4 class="font-semibold mb-2 text-slate-600">LayGA</h4>
+                        <h4 class="font-semibold mb-2 text-slate-600">Animatable Gaussians</h4>
                         <video class="w-full h-auto" autoplay loop muted playsinline>
-                            <source src="videos/clothwild_crop.mp4" type="video/mp4">
+                            <source src="videos/00185_AG.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -246,118 +283,101 @@
                     <div>
                         <h4 class="font-semibold mb-2 text-teal-600">Ours</h4>
                         <video class="w-full h-auto" autoplay loop muted playsinline>
-                            <source src="videos/ours_crop.mp4" type="video/mp4">
+                            <source src="videos/00185_ours.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
                 </div>
             </div>
-
-            <!-- Result Item 2 -->
-            <div class="bg-white rounded-lg shadow-lg p-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                    <!-- Column for Input Image -->
-                    <div>
-                        <h4 class="font-semibold mb-2 text-slate-600">Input Images</h4>
-                        <img src="images/example2.png" 
-                             alt="Input Image" 
-                             class="w-full h-auto rounded-lg shadow-md"
-                             onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
-                    </div>
-                    <!-- Column for Method 1 -->
-                    <div>
-                        <h4 class="font-semibold mb-2 text-slate-600">Animatable Gaussians</h4>
-                        <video class="w-full h-auto" autoplay loop muted playsinline>
-                            <source src="videos/smplicit2_crop.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <!-- Column for Method 2 -->
-                    <div>
-                        <h4 class="font-semibold mb-2 text-slate-600">LayGA</h4>
-                        <video class="w-full h-auto" autoplay loop muted playsinline>
-                            <source src="videos/clothwild2_crop.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <!-- Column for Ours -->
-                    <div>
-                        <h4 class="font-semibold mb-2 text-teal-600">Ours</h4>
-                        <video class="w-full h-auto" autoplay loop muted playsinline>
-                            <source src="videos/ours2_crop.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Add more result items by copying the structure above -->
 
         </div>
     </section>
 
-   <!-- Virtual Try-On Applications Section -->
+
     <section id="virtual-try-on" class="section">
         <h2 class="section-title">Virtual Try-On Applications</h2>
-        <div class="bg-white rounded-lg shadow-lg p-6 space-y-8">
-            <!-- Image Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div>
-                    <img src="images/0.jpg" 
-                         alt="Virtual Try-On 1" 
-                         class="w-full h-auto rounded-lg shadow-md"
-                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8 relative">
+
+            <!-- 1. Hidden Inputs (State Controllers) -->
+            <input type="radio" name="tryon-tabs" id="tab0" class="hidden" checked>
+            <input type="radio" name="tryon-tabs" id="tab1" class="hidden">
+            <input type="radio" name="tryon-tabs" id="tab2" class="hidden">
+            <input type="radio" name="tryon-tabs" id="tab3" class="hidden">
+
+            <!-- 2. Main Layout (Connected to Inputs via CSS sibling selectors) -->
+            <div class="tryon-layout grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left: Thumbnails Selection Panel -->
+                <div class="md:col-span-4 lg:col-span-5 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-700 mb-4 text-center border-b pb-2">Select Subject</h3>
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                        
+                        <!-- Thumbnail 0 (Linked to tab0) -->
+                        <label for="tab0" class="thumb0 thumbnail-btn cursor-pointer rounded-lg overflow-hidden border-4 border-transparent hover:border-teal-300 shadow-sm block">
+                            <img src="images/0.jpg" 
+                                 alt="Try-On Subject 0" 
+                                 class="w-full h-40 sm:h-48 object-cover hover:opacity-90 transition-opacity"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Subject+0';">
+                        </label>
+                        
+                        <!-- Thumbnail 1 (Linked to tab1) -->
+                        <label for="tab1" class="thumb1 thumbnail-btn cursor-pointer rounded-lg overflow-hidden border-4 border-transparent hover:border-teal-300 shadow-sm block">
+                            <img src="images/1.jpg" 
+                                 alt="Try-On Subject 1" 
+                                 class="w-full h-40 sm:h-48 object-cover hover:opacity-90 transition-opacity"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Subject+1';">
+                        </label>
+                        
+                        <!-- Thumbnail 2 (Linked to tab2) -->
+                        <label for="tab2" class="thumb2 thumbnail-btn cursor-pointer rounded-lg overflow-hidden border-4 border-transparent hover:border-teal-300 shadow-sm block">
+                            <img src="images/2.jpg" 
+                                 alt="Try-On Subject 2" 
+                                 class="w-full h-40 sm:h-48 object-cover hover:opacity-90 transition-opacity"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Subject+2';">
+                        </label>
+                        
+                        <!-- Thumbnail 3 (Linked to tab3) -->
+                        <label for="tab3" class="thumb3 thumbnail-btn cursor-pointer rounded-lg overflow-hidden border-4 border-transparent hover:border-teal-300 shadow-sm block">
+                            <img src="images/3.jpg" 
+                                 alt="Try-On Subject 3" 
+                                 class="w-full h-40 sm:h-48 object-cover hover:opacity-90 transition-opacity"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Subject+3';">
+                        </label>
+
+                    </div>
                 </div>
-                <div>
-                    <img src="images/1.jpg" 
-                         alt="Virtual Try-On 2" 
-                         class="w-full h-auto rounded-lg shadow-md"
-                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
+
+                <!-- Right: Video Player Display -->
+                <div class="md:col-span-8 lg:col-span-7 flex flex-col justify-center h-full">
+                    <div class="relative bg-slate-200 rounded-xl overflow-hidden shadow-inner flex items-center justify-center min-h-[300px] md:min-h-[450px]">
+                        
+                        <!-- All Videos loaded simultaneously, CSS toggles visibility -->
+                        <video class="vid0 w-full h-auto max-h-[600px] object-contain rounded-xl" autoplay loop muted playsinline>
+                            <source src="videos/00140_00127_test.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        
+                        <video class="vid1 w-full h-auto max-h-[600px] object-contain rounded-xl" autoplay loop muted playsinline>
+                            <source src="videos/00140_00134_test.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <video class="vid2 w-full h-auto max-h-[600px] object-contain rounded-xl" autoplay loop muted playsinline>
+                            <source src="videos/00140_00156_test.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <video class="vid3 w-full h-auto max-h-[600px] object-contain rounded-xl" autoplay loop muted playsinline>
+                            <source src="videos/00140_00163_test.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                    </div>
                 </div>
-                <div>
-                    <img src="images/2.jpg" 
-                         alt="Virtual Try-On 3" 
-                         class="w-full h-auto rounded-lg shadow-md"
-                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
-                </div>
-                <div>
-                    <img src="images/3.jpg" 
-                         alt="Virtual Try-On 4" 
-                         class="w-full h-auto rounded-lg shadow-md"
-                         onerror="this.onerror=null;this.src='https://placehold.co/300x400/e2e8f0/334155?text=Image+Not+Found';">
-                </div>
-            </div>
-            <!-- Video Row -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div>
-                    <video class="w-full h-auto" autoplay loop muted playsinline>
-                        <source src="videos/aitviewer_0_crop.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div>
-                    <video class="w-full h-auto" autoplay loop muted playsinline>
-                        <source src="videos/aitviewer_1_crop.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div>
-                    <video class="w-full h-auto" autoplay loop muted playsinline>
-                        <source src="videos/aitviewer_2_crop.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
-                <div>
-                    <video class="w-full h-auto" autoplay loop muted playsinline>
-                        <source src="videos/aitviewer_3_crop.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </div>
+
             </div>
         </div>
     </section>
-
-
 
     <!-- References Section -->
     <section id="references" class="section">
@@ -365,7 +385,7 @@
         <div class="max-w-5xl mx-auto text-slate-700 leading-relaxed">
             <ul class="list-disc list-inside space-y-2">
                 <li>
-                    Rong et.al,"<a href="https://eth-ait.github.io/Gaussian-Garments/" target="_blank" class="text-link">Gaussian Garments: Reconstructing Simulation-Ready Clothing with Photo-Realistic Appearance from Multi-View Video</a>." 3DV, 2025.
+                    Rong et.al, "<a href="https://eth-ait.github.io/Gaussian-Garments/" target="_blank" class="text-link">Gaussian Garments: Reconstructing Simulation-Ready Clothing with Photo-Realistic Appearance from Multi-View Video</a>." 3DV, 2025.
                 </li>
                 <li>
                     Li et. al, "<a href="https://animatable-gaussians.github.io/" target="_blank" class="text-link">Animatable Gaussians: Learning Pose-dependent Gaussian Maps for High-fidelity Human Avatar Modeling</a>." CVPR, 2024.
@@ -408,25 +428,19 @@
     </footer>
 
     <script>
-        // JavaScript for Copy to Clipboard functionality
+        // --- Copy to Clipboard functionality (Kept intact, unrelated to video) ---
         const copyButton = document.getElementById('copy-button');
         const bibtexContent = document.getElementById('bibtex-content');
 
         copyButton.addEventListener('click', () => {
-            // Create a temporary textarea element to hold the text
             const textArea = document.createElement('textarea');
             textArea.value = bibtexContent.innerText;
-            
-            // Hide the textarea from view
             textArea.style.position = 'fixed';
             textArea.style.left = '-9999px';
-            
             document.body.appendChild(textArea);
-            
             textArea.select();
             
             try {
-                // Use the older execCommand for broader compatibility in iFrames
                 const successful = document.execCommand('copy');
                 if (successful) {
                     copyButton.textContent = 'Copied!';
@@ -436,16 +450,13 @@
                         copyButton.classList.remove('copied');
                     }, 2000);
                 } else {
-                    // We don't use alert in this environment.
                     console.error('Oops, unable to copy');
                 }
             } catch (err) {
                 console.error('Fallback: Oops, unable to copy', err);
             }
-            
             document.body.removeChild(textArea);
         });
     </script>
-
 </body>
 </html>
