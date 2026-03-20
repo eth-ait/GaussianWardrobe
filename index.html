@@ -165,7 +165,7 @@
                 <a href="https://arxiv.org/abs/2603.04290" class="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">Paper</a>
                 <a href="https://github.com/eth-ait/GaussianWardrobe" class="bg-gray-800 text-white font-semibold px-6 py-2 rounded-lg hover:bg-gray-900 transition-colors">Code</a>
                 <a href="https://www.youtube.com/watch?v=AZ-OzDKw4QU" class="bg-teal-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-teal-600 transition-colors">Video</a>
-                <a href="#" class="bg-orange-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors">Poster</a>
+                <a href="https://drive.google.com/file/d/1Hmsg8e64bMcgJOyeBrxpEUPsw8eaco2e/view?usp=sharing" class="bg-orange-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors">Poster</a>
             </div>
         </div>
     </header>
@@ -246,6 +246,7 @@
         </div>
     </section>
 
+
     <!-- Results Section -->
     <section id="results" class="section">
         <h2 class="section-title">Avatar Animation on 4D-DRESS (Novel Poses)</h2>
@@ -290,6 +291,47 @@
                 </div>
             </div>
 
+            <!-- Result Item 2 -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <!-- Column for GT -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">GT Reference</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/00127_gt.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <!-- Column for Method 1 -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">LayGA</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/00127_LAYGA.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <!-- Column for Method 2 -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-slate-600">Animatable Gaussians</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/00127_AG.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <!-- Column for Ours -->
+                    <div>
+                        <h4 class="font-semibold mb-2 text-teal-600">Ours</h4>
+                        <video class="w-full h-auto" autoplay loop muted playsinline>
+                            <source src="videos/00127_ours.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+            <p class="mb-4" style="text-align: justify;">
+                * Shown results are based on our base models plus a virtual bone extension implemented after our paper submission. 
+            </p>
         </div>
     </section>
 
