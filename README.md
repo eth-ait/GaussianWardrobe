@@ -95,4 +95,12 @@ Our code is based on the following repos:
 - [3D Gaussian Splatting](https://github.com/graphdeco-inria/diff-gaussian-rasterization) and its [adapted version](https://github.com/ashawkey/diff-gaussian-rasterization)
 - [StyleAvatar](https://github.com/LizhenWangT/StyleAvatar)
 
+# Checkpoints
+
+- 4D-Dress:
+    - 00140: https://drive.google.com/file/d/1jIrfcN5cp6uzLfVRsYdzSpTqbfeB4Ovj/view?usp=sharing
+    - 00134: https://drive.google.com/file/d/1jIrfcN5cp6uzLfVRsYdzSpTqbfeB4Ovj/view?usp=sharing
+    - 00154: https://drive.google.com/file/d/1jIrfcN5cp6uzLfVRsYdzSpTqbfeB4Ovj/view?usp=sharing
+    - 00163: https://drive.google.com/drive/folders/1B_KPSJhX6Q8XmD1gAxEq9m8UeSGCwXQD?usp=sharing
+
 
