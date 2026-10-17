@@ -29,7 +29,7 @@ data_dir
 1. Reconstruct a template of the body using the smpl parameters.
 - save it as ``template_cloth.py``
 
-2. Given the pose and body shape from ``smpl_params.npz``, generate ``template_body_offset.py`` and ``template_cloth_offset.py``, which stores the body and cloth meshes in canonical shape-zero space. The side product ``template_body_offset.pkl`` and ``template_cloth_offset.pkl`` stores the shape offset information
+2. Given the pose and body shape from ``smpl_params.npz``, generate ``template_body_offset.py`` and ``template_cloth_offset.py``, which stores the body and cloth meshes in canonical shape-zero space. The side product ``template_body_offset.pkl`` and ``template_cloth_offset.pkl`` stores the shape offset information. Note for 4D-Dress subjects we provide the script for these processing. You can use gen_data/create_mesh_avatar.py to generate the canonical template and use gen_data/cano_to_shaped.py to restore the canonical templates to shape-zero space. The needed assets should be provided by the 4D-Dress.
 
 3. Generate original beta-shaped and shape-zero weight volume:
     1. For shape-zero: ```gen_data/gen_weight_volume.py -c configs/4d_dress/template.yaml -z```
