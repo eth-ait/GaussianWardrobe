@@ -66,12 +66,14 @@ We provided a script ``generate_pos_script.py`` for generating the exchange data
 1. Run ``generate_pos_script.py`` for the target combination
 2. Run:
 ```
-python main_avatar.py -c configs/4d_dress/exchange.yaml --mode=exchange_cloth 
+python main_avatar.py -c configs/4d_dress/exchange.yaml --mode=exchange_cloth
 ```
 
 Some example exchange examples are provided under ``assets`` folder, e.g. 185_134_full.mp4 and 127_134_outer.mp4
 
 For other combinations please follow the format in the ``configs/4d_dress/exchange.yaml`` configuration files
+
+One template data for this Virtual-Tryon application is provided [here](https://drive.google.com/drive/folders/1SpruVzJ1OmrWIh5mNopkN6ry0r8_z7GO?usp=sharing)
 
 # Evaluation
 We provide evaluation metrics in [eval/eval_metrics.py](eval/eval_metrics.py).
