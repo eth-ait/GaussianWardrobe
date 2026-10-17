@@ -15,6 +15,7 @@ from utils import *
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
+# Here are two configurations: one for 4D-Dress and ActorsHQ 
 # smplx_body_model_fit = SMPLX('body_models/smplx', gender='neutral', num_pca_comps=12,
 #                             use_pca=True, flat_hand_mean=True, use_face_contour=False).to(device)
 
